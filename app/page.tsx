@@ -309,8 +309,8 @@ export default function Home() {
     }, [state, timerId]);
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center p-4">
-            <h1 className="text-3xl font-bold text-center fixed top-20 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-md">
+        <div className="flex min-h-screen flex-col items-center p-4 pt-20">
+            <div className="text-3xl font-bold text-center top-20 left-1/2 transform z-10 w-full max-w-md">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-4xl">
                     小诗的自习室
                 </span>
@@ -326,7 +326,7 @@ export default function Home() {
                         className="w-32 h-32 ml-2 mt-4"
                     />
                 </div>
-            </h1>
+            </div>
             <div className="w-full max-w-md mt-20">
                 {state === "selecting" && (
                     <div className="card">
