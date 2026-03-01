@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
 // 自定义提示框组件
 const NotificationToast = ({
     message,
@@ -221,7 +220,7 @@ export default function Home() {
             setTimerId(null);
             setState("selecting");
             notifyDeveloper();
-            showNotification("小诗老师请认真学习！", "warning");
+            showNotification("不认真学习的小诗是小狗！", "warning");
         }
     };
 
@@ -311,10 +310,22 @@ export default function Home() {
 
     return (
         <div className="flex min-h-screen flex-col items-center justify-center p-4">
-            <h1 className="text-3xl font-bold text-center fixed top-48 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-md">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500">
+            <h1 className="text-3xl font-bold text-center fixed top-20 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-md">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-4xl">
                     小诗的自习室
                 </span>
+                <div className="flex justify-center gap-8 mt-2">
+                    <img
+                        src="/jhc.gif"
+                        alt="jhc"
+                        className="w-32 h-32 ml-2 mt-4"
+                    />
+                    <img
+                        src="/csj.gif"
+                        alt="jhc"
+                        className="w-32 h-32 ml-2 mt-4"
+                    />
+                </div>
             </h1>
             <div className="w-full max-w-md mt-20">
                 {state === "selecting" && (
@@ -361,7 +372,7 @@ export default function Home() {
                         {/* 自定义时间输入框 */}
                         {showCustomInput && (
                             <div className="mt-6 p-4 bg-pink-50 rounded-xl border-2 border-pink-200">
-                                <div className="flex items-center space-x-3">
+                                <div className="flex items-center gap-2 w-full">
                                     <input
                                         type="text"
                                         value={customTime}
@@ -371,18 +382,20 @@ export default function Home() {
                                             )
                                         }
                                         placeholder="输入分钟数"
-                                        className="flex-1 px-4 py-2 rounded-lg border-2 border-pink-300 focus:border-pink-500 focus:outline-none"
+                                        className="flex-1 px-4 py-2 rounded-lg border-2 border-pink-300 focus:border-pink-500 focus:outline-none min-w-0"
                                         maxLength={3}
                                     />
-                                    <span className="text-pink-600 font-medium">
-                                        分钟
-                                    </span>
-                                    <button
-                                        onClick={confirmCustomTime}
-                                        className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors"
-                                    >
-                                        确认
-                                    </button>
+                                    <div className="flex items-center gap-2 flex-shrink-0">
+                                        <span className="text-pink-600 font-medium whitespace-nowrap">
+                                            分钟
+                                        </span>
+                                        <button
+                                            onClick={confirmCustomTime}
+                                            className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors whitespace-nowrap min-w-[80px]"
+                                        >
+                                            确认
+                                        </button>
+                                    </div>
                                 </div>
                                 <p className="text-xs text-pink-500 mt-2">
                                     小诗快输入1-240分钟之间的时间
