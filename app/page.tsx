@@ -148,6 +148,11 @@ export default function Home() {
     } | null>(null);
     const [customTime, setCustomTime] = useState<string>("");
     const [showCustomInput, setShowCustomInput] = useState<boolean>(false);
+    const notifyText = {
+        begin: "小诗老师开始自律了！",
+        warning: "小诗又玩手机啦啊啊啊啊啊啊，快去问问她怎么又玩上了!",
+        end: "小诗老师已自律完毕！",
+    };
 
     // 时间选项
     const timeOptions = [
@@ -196,10 +201,14 @@ export default function Home() {
     const startTimer = () => {
         setState("counting");
         setTimeLeft(selectedTime);
+        // 开始计时时通知开发者
+        notifyDeveloper(notifyText.begin);
         const id = setInterval(() => {
             setTimeLeft((prev) => {
                 if (prev <= 1) {
                     clearInterval(id);
+                    // 计时结束时通知开发者
+                    notifyDeveloper(notifyText.end);
                     setState("completed");
                     showNotification(
                         "小诗老师真厉害，又自律了一把！",
@@ -219,7 +228,7 @@ export default function Home() {
             clearInterval(timerId);
             setTimerId(null);
             setState("selecting");
-            notifyDeveloper();
+            notifyDeveloper(notifyText.warning);
             showNotification("不认真学习的小诗是小狗！", "warning");
         }
     };
@@ -238,14 +247,14 @@ export default function Home() {
     };
 
     // 通知开发者
-    const notifyDeveloper = () => {
+    const notifyDeveloper = (text: string) => {
         const currentTime = formatCurrentTime();
         console.log("通知开发者：用户提前结束了学习", currentTime);
 
         // 实际项目中可以使用fetch或axios调用API
         fetch(
             `https://push.spug.cc/send/4NbKBjzNqdjpxWeP?key1=${encodeURIComponent(
-                "小诗又玩手机啦啊啊啊啊啊啊，快去问问她怎么又玩上了!"
+                text
             )}&key2=${encodeURIComponent(currentTime)}`,
             {
                 method: "GET",
@@ -289,7 +298,7 @@ export default function Home() {
 
         const handleBeforeUnload = () => {
             if (state === "counting") {
-                notifyDeveloper();
+                notifyDeveloper(notifyText.warning);
             }
         };
 
